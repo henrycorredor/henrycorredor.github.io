@@ -1,0 +1,301 @@
+---
+import {Image} from "astro:assets"
+import type {ImageMetadata} from "astro";
+
+interface Props {
+    pictures: string[]
+    workName: string
+    workType: string
+}
+
+const {pictures, workName, workType} = Astro.props
+
+const worksImages = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/content/works/*/*/*.{jpeg,jpg,png,gif}",
+)
+
+pictures.forEach((_) => {
+    const key = `/src/content/works/${workType}/${workName}/${_}`
+    if (!worksImages[key]) throw new Error(`Picture "${_}" nonexistent`)
+})
+
+const COMPONENT_PREFIX = "hww-gallery"
+---
+
+<div class=`${COMPONENT_PREFIX}`>
+    {
+        pictures.map((_, i) => {
+            const key = `/src/content/works/${workType}/${workName}/${_}`
+            return (
+                    <div class={`${COMPONENT_PREFIX}__cell`}>
+                        <Image
+                                class={`${COMPONENT_PREFIX}__cell__picture`}
+                                src={worksImages[key]()}
+                                alt={`${workType} - gallery picture #${1 + i}`}
+                                width={220}
+                        />
+                    </div>
+            )
+        })
+    }
+    <div class={`${COMPONENT_PREFIX}__modal hide`}>
+        <div class={`${COMPONENT_PREFIX}__modal__image`}>
+            {
+                pictures.map((_, i) => {
+                    const key = `/src/content/works/${workType}/${workName}/${_}`
+                    return (
+                            <div
+                                    class={`${COMPONENT_PREFIX}__modal__image__container hide`}
+                                    data-picindex={i}
+                            >
+                                <Image
+                                        src={worksImages[key]()}
+                                        alt={`${workType} - gallery picture #${1 + i}`}
+                                        width={900}
+                                />
+                            </div>
+                    )
+                })
+            }
+        </div>
+        <div class={`${COMPONENT_PREFIX}__modal__nav`}>
+            <div class={`${COMPONENT_PREFIX}__modal__nav__left nav-button nav-button-arrow`}>
+                <span>Left</span>
+            </div>
+
+            <div class={`${COMPONENT_PREFIX}__modal__nav__pictures`}>
+                <div class={`${COMPONENT_PREFIX}__modal__nav__pictures__container`}>
+                    {
+                        pictures.map((_, i) => {
+                            const key = `/src/content/works/${workType}/${workName}/${_}`
+                            return (
+								<div
+									class={`${COMPONENT_PREFIX}__modal__nav__thumbs`}
+									data-picindex={i}
+								>
+									<Image
+										src={worksImages[key]()}
+										alt={`${workType} - thumb picture #${1 + i}`}
+										width={100}
+									/>
+								</div>
+                            )
+                        })
+                    }
+                </div>
+
+            </div>
+            <div class={`${COMPONENT_PREFIX}__modal__nav__right nav-button nav-button-arrow`}>
+                <span>Right</span>
+            </div>
+            <div class={`${COMPONENT_PREFIX}__modal__nav__close nav-button nav-button-close`}>
+                <span>Close</span>
+            </div>
+        </div>
+    </div>
+    <div class={`${COMPONENT_PREFIX}__modal__background hide`}></div>
+</div>
+
+<script>
+    const COMPONENT_PREFIX = "hww-gallery"
+    const pictures = document.querySelectorAll(
+        `.${COMPONENT_PREFIX}__modal__image__container`,
+    )
+    const thumbnails = document.querySelectorAll(
+        `.${COMPONENT_PREFIX}__cell__picture`,
+    )
+    const modalContainer = document.querySelector(`.${COMPONENT_PREFIX}__modal`)
+    const modalBackground = document.querySelector(
+        `.${COMPONENT_PREFIX}__modal__background`,
+    )
+    const galleryNavThumbs = document.querySelectorAll(
+        `.${COMPONENT_PREFIX}__modal__nav__thumbs`,
+    )
+
+    const topZIndex = pictures.length
+
+    function selectPicture(index: number) {
+        pictures.forEach((pic, i) => {
+            if (i === index) {
+                pic.classList.remove("hide")
+                pic.classList.add("show")
+                galleryNavThumbs[i].classList.add("selected")
+            } else {
+                pic.classList.add("hide")
+                pic.classList.remove("show")
+                galleryNavThumbs[i].classList.remove("selected")
+            }
+        })
+        displayModal(true)
+    }
+
+    function displayModal(show: boolean) {
+        if (show) {
+            modalContainer?.classList.remove("hide")
+            modalBackground?.classList.remove("hide")
+        } else {
+            modalContainer?.classList.add("hide")
+            modalBackground?.classList.add("hide")
+        }
+    }
+
+    thumbnails.forEach((thm, i) => {
+        thm.addEventListener("click", () => selectPicture(i))
+        galleryNavThumbs[i].addEventListener("click", () => selectPicture(i))
+    })
+
+    pictures.forEach((picture) => {
+        const observer = new MutationObserver((mutationsList) => {
+            for (let mutation of mutationsList) {
+                if (mutation.attributeName === "class") {
+                    const target = mutation.target as HTMLElement
+                    console.log(target.classList)
+                }
+            }
+        })
+
+        observer.observe(picture, {attributes: true})
+    })
+
+    modalBackground?.addEventListener("click", () => displayModal(false))
+</script>
+
+<style lang="less">
+  .hww-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 120px);
+    grid-gap: 20px 40px;
+
+    &__cell {
+      width: 140px;
+      height: 140px;
+      border: 1px solid tomato;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__modal {
+      width: 80vw;
+      height: fit-content;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 160;
+      display: flex;
+      flex-direction: column;
+      transform: translate(-50%, -50%);
+
+      &__image {
+        height: calc(80vh - 67px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__nav {
+        display: flex;
+        align-items: center;
+
+        .nav-button {
+          background: url("../assets/image-gallery-icons.svg");
+          cursor: pointer;
+        }
+        
+        .nav-button-arrow {
+          min-width: 27px;
+          height: 38px;
+          span{
+            display: none;
+          }
+        }
+		&__left{
+          margin-right: 1rem;
+        }
+        &__right{
+          margin-left: 1rem;
+          transform: rotate(180deg);
+        }
+        &__close{
+          background-position-x: right;
+        }
+        &__pictures {
+          display: flex;
+          flex-grow: 1;
+          width: calc(100% - 3rem - 54px);
+          &__container {
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 1rem;
+          }
+        }
+
+        &__thumbs {
+          flex: 0 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 67px;
+          overflow: hidden;
+          cursor: pointer;
+
+          &.selected {
+            border: white 0.5rem solid;
+            box-sizing: border-box;
+          }
+        }
+
+      }
+
+      &.hide {
+        display: none;
+      }
+
+      &__image {
+        &__container {
+          &.hide {
+            display: none;
+          }
+
+          &.toShow {
+            display: block;
+            opacity: 0;
+          }
+
+          &.show {
+            display: block;
+            opacity: 1;
+          }
+
+          img {
+            width: auto;
+            height: auto;
+            max-height: 70vh;
+            max-width: 70vw;
+          }
+        }
+      }
+
+      &__background {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.733);
+        z-index: 150;
+
+        &.hide {
+          display: none;
+        }
+      }
+    }
+  }
+</style>

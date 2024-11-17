@@ -1,0 +1,238 @@
+---
+interface Props {
+	pictures: string[]
+	title?: string
+}
+
+const {pictures, title = "pic-gallery"} = Astro.props
+---
+<div class="hww-gallery">
+	<div class="hww-gallery__shower">
+		<div class="hww-gallery__shower__pics-container">
+			{
+				pictures.map((pic, i) => {
+					return (
+						<div class="hww-gallery__shower__picture">
+							<img
+								src={`/images/${pic}`}
+								alt={`${title} - pic ${i}`}
+							/>
+						</div>
+					);
+				})
+			}
+		</div>
+	</div>
+	<div class="hww-gallery__pagination">
+		<div class="hww-gallery__pagination__left">
+			<button type="button">
+				<span>Move left</span>
+			</button>
+		</div>
+		<div class="hww-gallery__pagination__buttons">
+			{
+				pictures.map((_, i) => {
+					return (
+						<button
+							type="button"
+							class={`hww-gallery__pagination__button${i === 0 ? " selected" : ""}`}
+							data-gallery-page={i}
+						>
+							<span>Picture {i}</span>
+						</button>
+					);
+				})
+			}
+		</div>
+		<div class="hww-gallery__pagination__right">
+			<button type="button">
+				<span>Move left</span>
+			</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	const paginationButtons = document.querySelectorAll(
+    ".hww-gallery__pagination__button",
+  );
+  const galleryContainer = document.querySelector(
+    ".hww-gallery__shower__pics-container",
+  );
+  const galleryPictures = document.querySelectorAll(".hww-gallery__shower__picture")
+  const moveLeft = document.querySelector(".hww-gallery__pagination__left button")
+  const moveRight =  document.querySelector(".hww-gallery__pagination__right button")
+
+  let galleryActualPage = 0;
+
+  function updateSelectedButton() {
+    paginationButtons.forEach((x) => {
+      const setMyClass = x as HTMLButtonElement;
+      if (`${setMyClass.dataset.galleryPage}` === `${galleryActualPage}`) {
+        setMyClass.classList.add("selected");
+      } else {
+        setMyClass.classList.remove("selected");
+      }
+    });
+  }
+
+  function moveGallery() {
+    const container = galleryContainer as HTMLDivElement;
+    container.style.transform = `translateX(calc(100vw * ${galleryActualPage} * -1))`;
+    updateSelectedButton();
+  }
+
+  paginationButtons.forEach((_) => {
+    const button = _ as HTMLButtonElement;
+    button.addEventListener("click", () => {
+      const { galleryPage } = button.dataset;
+      galleryActualPage = Number(galleryPage);
+      moveGallery();
+    });
+  });
+  moveLeft?.addEventListener("click", () => {
+    --galleryActualPage
+    if(galleryActualPage < 0){
+      galleryActualPage = (galleryPictures?.length - 1) || 0
+    }
+    moveGallery()
+  })
+
+  moveRight?.addEventListener("click", () => {
+    ++galleryActualPage
+    if(galleryActualPage > galleryPictures?.length - 1){
+      galleryActualPage = 0
+    }
+    moveGallery()
+  })
+</script>
+
+<style lang="less">
+  .hww-gallery {
+    position: relative;
+    &__shower {
+      overflow: hidden;
+      margin: 0 auto;
+      &__pics-container {
+        display: flex;
+        transition: all 0.4s;
+      }
+      &__picture {
+        width: 100vw;
+        min-width: 100vw;
+        height: calc(100vw * 0.75);
+        img {
+          object-fit: contain;
+          width: 95%;
+          height: 100%;
+					margin: 0 auto;
+        }
+      }
+    }
+
+    &__pagination {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      &__left,
+      &__right {
+        flex-grow: 1;
+        button {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: relative;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          &::after,
+          &::before {
+            position: absolute;
+            content: "";
+            display: block;
+            width: 30px;
+            height: 10px;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+          }
+          &::after {
+            bottom: calc(4rem - 7px);
+          }
+          &::before {
+            bottom: calc(4rem + 8px);
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+
+      &__left {
+        button {
+          &::after, &::before{
+            right: 1rem;
+          }
+          &::after {
+            transform: rotate(45deg);
+          }
+          &::before{
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      &__right {
+        button {
+          &::after {
+            transform: rotate(-45deg);
+          }
+          &::before{
+            transform: rotate(45deg);
+          }
+        }
+      }
+
+      &__buttons {
+        display: flex;
+        align-items: end;
+        padding-bottom: 4rem;
+        button {
+          display: block;
+          border: none;
+          outline: none;
+          width: 10px;
+          height: 10px;
+          border-radius: 20px;
+          padding: 0;
+          margin: 0 5px;
+          background-color: white;
+          box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+          cursor: pointer;
+
+          &.selected {
+            width: 14px;
+            height: 14px;
+            margin: -2px 3px;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .hww-gallery {
+      &__shower {
+        &__picture {
+          width: 60vw;
+          min-width: 60vw;
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,130 @@
+---
+
+---
+
+<header>
+	<h1><a href="/">Wenwen</a></h1>
+	<nav>
+		<ul class="nav-first-level">
+			<li>
+				Works
+				<ul class="nav-second-level">
+					<li>
+						<a
+							href="/works/scultpture-and-interactive-installation"
+							class={Astro.url.pathname ===
+							"/works/scultpture-and-interactive-installation"
+								? "active"
+								: "normal"}>Sculpture & Interactive Installation</a
+						>
+					</li>
+					<li>
+						<a
+							href="/works/conceptual-performance"
+							class={Astro.url.pathname === "/works/conceptual-performance"
+								? "active"
+								: "normal"}>Conceptual Performance</a
+						>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a
+					href="/about"
+					class={Astro.url.pathname === "/about" ? "active" : "normal"}>About</a
+				>
+			</li>
+			<li>
+				<a
+					href="/events-and-exhibitions"
+					class={Astro.url.pathname === "/events-and-exhibitions"
+						? "active"
+						: "normal"}>Events and Exhibitions</a
+				>
+			</li>
+		</ul>
+	</nav>
+</header>
+
+<script>
+	document.querySelector("header")?.addEventListener("click", () => {
+		document.querySelector("nav")?.classList.toggle("open")
+	})
+</script>
+
+<style lang="less">
+	header {
+		position: relative;
+		background: url("../assets/styles/icon-menu.gif") no-repeat center right
+			1rem;
+		border-bottom: 1px solid #c4c4c4;
+
+		h1 {
+			margin-left: .8rem;
+			margin-bottom: 0;
+			a {
+				text-decoration: none;
+				color: black;
+				font-family: "Raleway-black";
+			}
+		}
+	}
+
+	nav {
+		width: 100vw;
+		max-height: 0;
+		position: absolute;
+		overflow: hidden;
+		background-color: white;
+		transition: all 0.3s;
+		z-index: 100;
+
+		a {
+			text-decoration: none;
+			color: black;
+		}
+		li {
+			list-style: none;
+			font-weight: bold;
+			margin-bottom: 1rem;
+		}
+		&.active {
+			font-weight: bold;
+		}
+		&.open {
+			max-height: 300px;
+			padding: 1rem 0;
+			box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+		}
+	}
+
+	ul.nav-second-level li {
+		font-weight: normal;
+		margin-top: 1rem;
+	}
+
+	@media (min-width: 992px) {
+		header{
+			border-bottom: none;
+			padding: 0;
+
+			h1{
+				margin: 50px 40px 1px;
+				text-align: center;
+				border-bottom: 1px solid #c4c4c4;
+				line-height: 28px;
+			}
+		}
+		nav{
+			position: inherit;
+			max-height: inherit;
+			width: inherit;
+			padding: 3rem 40px;
+			&.open{
+				max-height: inherit;
+				box-shadow: none;
+				padding: 3rem 40px;
+			}
+		}
+	}
+</style>

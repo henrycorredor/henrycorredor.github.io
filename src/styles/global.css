@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "Raleway-black";
+    src: url("../assets/fonts/Raleway-Black.ttf");
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../assets/fonts/Raleway-SemiBold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../assets/fonts/Raleway-Regular.ttf");
+    font-weight: normal;
+}
+
+body{
+    font-family: "Raleway", Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1, h2, h3{
+    margin-bottom: 1.5rem;
+}
+
+p{
+    margin-bottom: 1rem;
+}
+
+section.main{
+    padding: 0 1rem 1rem;
+}
+
+section.p-3{
+    padding-top: 3rem;
+}
