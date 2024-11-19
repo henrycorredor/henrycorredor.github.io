@@ -1,5 +1,4 @@
 ---
-layout: ../../../layout/Work.astro
 title: 'Food Variation'
 year: '2018'
 description: Paperboard, rope, plant fiber glue, yogurt melts.

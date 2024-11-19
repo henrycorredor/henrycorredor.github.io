@@ -1,5 +1,4 @@
 ---
-layout: ../../../layout/Work.astro
 title: 'Poi Dance Improvisations'
 order: 2
 gallery: [

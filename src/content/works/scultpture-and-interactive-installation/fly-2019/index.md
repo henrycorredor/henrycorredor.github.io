@@ -1,5 +1,4 @@
 ---
-layout: ../../../layout/Work.astro
 title: "'Fly' 2019"
 year: '2019'
 description: Electronics
