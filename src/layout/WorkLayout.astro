@@ -1,75 +1,90 @@
 ---
 import PhotoGallery from "../components/PhotoGallery.astro";
 import Global from "./Global.astro";
-import type { CollectionEntry } from "astro:content";
+import type {CollectionEntry} from "astro:content";
 
 interface Props {
-	workObj: CollectionEntry<"works">;
+    workObj: CollectionEntry<"works">;
 }
-const { workObj } = Astro.props;
-const { data } = workObj;
-const { gallery, wistiaId, qqVideoId, vimeoId } = data;
+const {workObj} = Astro.props;
+const {data} = workObj;
+const {gallery, wistiaId, qqVideoId, vimeoId} = data;
 const [workType, workName] = workObj.slug.split('/')
 ---
 
 <Global pageTitle={data.title}>
-	{
-		gallery && (
-			<section class="work-gallery">
-				<PhotoGallery pictures={gallery} workType={workType} workName={workName} />
-			</section>
-		)
-	}
-	{
-		wistiaId &&
-			wistiaId.map((videoId) => (
-				<section>
-					<div
-						class={`wistia_embed wistia_async_${videoId}`}
-						style="height:360px;width:640px"
-					>
-						&nbsp;
-					</div>
-				</section>
-			))
-	}
-	{
-		qqVideoId &&
-			qqVideoId.map((videoId) => (
-				<iframe
-					src={`https://v.qq.com/txp/iframe/player.html?vid=${videoId}`}
-					allow={"autoplay; fullscreen"}
-					allowfullscreen={true}
-				/>
-			))
-	}
-	{
-		vimeoId &&
-			vimeoId.map((videoId) => (
-				<iframe
-					src={`https://player.vimeo.com/video/${videoId}`}
-					allow={"autoplay; fullscreen"}
-					allowfullscreen={true}
-				/>
-			))
-	}
-	<section class="main">
-		<h2>{data.title}</h2>
-		<div class="work-description">
-			{data.description}
-		</div>
-		<div class="work-content">
-			<slot />
-		</div>
-	</section>
+    <section class="main">
+        <h2>{data.title}</h2>
+        <div class="work-description">
+            {data.description}
+        </div>
+        <div class="work-content">
+            <slot/>
+        </div>
+    </section>
+    {
+        gallery && (
+                    <section class="work-gallery">
+                        <PhotoGallery pictures={gallery} workType={workType} workName={workName}/>
+                    </section>
+        )
+    }
+    {
+        wistiaId &&
+        wistiaId.map((videoId) => (
+                <div class="work_media_container">
+                    <section>
+                        <div
+                                class={`wistia_embed wistia_async_${videoId}`}
+                                style="height:360px;width:640px"
+                        >
+                            &nbsp;
+                        </div>
+                    </section>
+                </div>
+        ))
+    }
+    {
+        qqVideoId &&
+        qqVideoId.map((videoId) => (
+                <div class="work_media_container">
+                    <iframe
+                            src={`https://v.qq.com/txp/iframe/player.html?vid=${videoId}`}
+                            allow={"autoplay; fullscreen"}
+                            allowfullscreen={true}
+                    />
+                </div>
+        ))
+    }
+    {
+        vimeoId &&
+        vimeoId.map((videoId) => (
+                <div class="work_media_container">
+                    <iframe
+                            src={`https://player.vimeo.com/video/${videoId}`}
+                            allow={"autoplay; fullscreen"}
+                            allowfullscreen={true}
+                    />
+                </div>
+        ))
+    }
 </Global>
 
 {
-	wistiaId && (
-		<script
-			charset="ISO-8859-1"
-			src="//fast.wistia.com/assets/external/E-v1.js"
-			async
-		/>
-	)
-}
+    wistiaId && (
+    <script
+            charset="ISO-8859-1"
+            src="https://fast.wistia.com/assets/external/E-v1.js"
+            async></script>
+        )
+    }
+
+<style>
+    section {
+        margin-bottom: 2rem;
+    }
+
+    .work_media_container {
+        margin-bottom: 2rem;
+    }
+</style>
