@@ -69,16 +69,16 @@ const COMPONENT_PREFIX = "hww-gallery"
                         pictures.map((_, i) => {
                             const key = `/src/content/works/${workType}/${workName}/${_}`
                             return (
-								<div
-									class={`${COMPONENT_PREFIX}__modal__nav__thumbs`}
-									data-picindex={i}
-								>
-									<Image
-										src={worksImages[key]()}
-										alt={`${workType} - thumb picture #${1 + i}`}
-										width={100}
-									/>
-								</div>
+                                    <div
+                                            class={`${COMPONENT_PREFIX}__modal__nav__thumbs`}
+                                            data-picindex={i}
+                                    >
+                                        <Image
+                                                src={worksImages[key]()}
+                                                alt={`${workType} - thumb picture #${1 + i}`}
+                                                width={100}
+                                        />
+                                    </div>
                             )
                         })
                     }
@@ -112,7 +112,8 @@ const COMPONENT_PREFIX = "hww-gallery"
         `.${COMPONENT_PREFIX}__modal__nav__thumbs`,
     )
 
-    const topZIndex = pictures.length
+    // const topZIndex = pictures.length
+    let actualPicture = 0
 
     function selectPicture(index: number) {
         pictures.forEach((pic, i) => {
@@ -127,6 +128,7 @@ const COMPONENT_PREFIX = "hww-gallery"
             }
         })
         displayModal(true)
+        actualPicture = index
     }
 
     function displayModal(show: boolean) {
@@ -158,6 +160,17 @@ const COMPONENT_PREFIX = "hww-gallery"
     })
 
     modalBackground?.addEventListener("click", () => displayModal(false))
+    document.querySelector(`.${COMPONENT_PREFIX}__modal__nav__right`)?.addEventListener("click", () => {
+        actualPicture++
+        selectPicture(actualPicture === pictures.length ? 0 : actualPicture)
+    })
+    document.querySelector(`.${COMPONENT_PREFIX}__modal__nav__left`)?.addEventListener("click", () => {
+        actualPicture--
+        selectPicture(actualPicture < 0 ? (pictures.length - 1) : actualPicture)
+    })
+    document.querySelector(`.${COMPONENT_PREFIX}__modal__nav__close`)?.addEventListener("click", () => {
+        displayModal(false)
+    })
 </script>
 
 <style lang="less">
@@ -169,8 +182,8 @@ const COMPONENT_PREFIX = "hww-gallery"
     &__cell {
       width: 140px;
       height: 140px;
-      border: 1px solid tomato;
       overflow: hidden;
+      cursor: pointer;
 
       img {
         width: 100%;
@@ -200,39 +213,48 @@ const COMPONENT_PREFIX = "hww-gallery"
       &__nav {
         display: flex;
         align-items: center;
+        justify-content: center;
 
         .nav-button {
-          background: url("../assets/image-gallery-icons.svg");
-          cursor: pointer;
-        }
-        
-        .nav-button-arrow {
-          min-width: 27px;
           height: 38px;
-          span{
+          background: url("../assets/image-gallery-icons-v2.svg");
+          cursor: pointer;
+
+          span {
             display: none;
           }
         }
-		&__left{
+
+        .nav-button-arrow {
+          min-width: 27px;
+        }
+
+        &__left {
           margin-right: 1rem;
         }
-        &__right{
+
+        &__right {
           margin-left: 1rem;
           transform: rotate(180deg);
         }
-        &__close{
-          background-position-x: right;
+
+        &__close {
+          min-width: 37px;
+          margin-left: 1rem;
+          background-position-x: right !important;
         }
+
         &__pictures {
           display: flex;
-          flex-grow: 1;
-          width: calc(100% - 3rem - 54px);
+          max-width: calc(100% - 3rem - 91px); //button margin 1rem * 3, button width 27px * 2 + 37px
+
           &__container {
             margin: 0 auto;
             display: flex;
             flex-wrap: nowrap;
             overflow-x: auto;
             gap: 1rem;
+            padding: .5rem 0;
           }
         }
 
