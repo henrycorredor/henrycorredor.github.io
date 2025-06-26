@@ -6,17 +6,32 @@ import Footer from "@/components/Footer.astro";
 import Navigation from "@/components/Navigation.astro";
 ---
 
-<html lang="en">
+<html lang="en" class="h-full">
   <BaseHead>
     <slot name="head" />
   </BaseHead>
-  <body class="bg-bg dark:bg-dark-bg">
-    <Navigation />
-    <div class="mx-auto max-w-screen-sm p-3 font-sans sm:p-6">
-      <main class="min-h-[80vh]">
-        <slot />
-      </main>
-      <Footer />
+  <body class="bg-bg dark:bg-dark-bg h-full">
+    <div class="flex h-full items-stretch">
+      <div id="p5-container" class="flex-1/2"></div>
+      <div id="content-container" class="flex-1/2">
+        <Navigation />
+        <div class="mx-auto max-w-screen-sm p-3 font-sans sm:p-6">
+          <main class="min-h-[80vh]">
+            <slot />
+          </main>
+          <!--<Footer />-->
+        </div>
+      </div>
     </div>
   </body>
 </html>
+
+<script>
+  import p5 from 'p5';
+  import homeSketch from "@/sketches/home";
+
+  const sketchContainer = document.getElementById('p5-container') as HTMLDivElement;
+  if (sketchContainer) {
+    new p5(homeSketch(sketchContainer), sketchContainer)
+  }
+</script>
