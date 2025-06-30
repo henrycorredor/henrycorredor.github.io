@@ -1,9 +1,19 @@
 import type p5 from "p5";
 import oklchToRgb from "@/utils/okLabToRgb.ts";
+import illustration from "@/assets/kurilabs-homepage-illustration.jpg";
+
+const SPACING = 10;
+const R_MIN = 2;
+const INFLUENCE = 1200;
+const INV_INF = 1 / INFLUENCE;
+
+const particles: { x: number; y: number; max: number }[] = [];
 
 function homeSketch(container: HTMLDivElement) {
   const rootBackgroundColor = getComputedStyle(document.body).backgroundColor;
-  const colorData = rootBackgroundColor.match(/oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)/)
+  const colorData = rootBackgroundColor.match(
+    /oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)/,
+  );
   const bgColorRGB = oklchToRgb({
     L: Number(colorData?.[1]) * 100,
     C: Number(colorData?.[2]),
@@ -11,14 +21,59 @@ function homeSketch(container: HTMLDivElement) {
   });
 
   return function (p: p5) {
-    p.setup = () => {
+    p.setup = async () => {
       const { offsetWidth, offsetHeight } = container;
       p.createCanvas(offsetWidth, offsetHeight).parent(container);
+      p.pixelDensity(1);
       p.background(bgColorRGB.r, bgColorRGB.g, bgColorRGB.b);
-      p.fill(100);
-      p.ellipse(100, 100, 200);
+
+      const guidePicture = await p.loadImage(illustration.src);
+      guidePicture.loadPixels();
+
+      const paddingX =
+        offsetWidth - guidePicture.width > 0
+          ? (offsetWidth - guidePicture.width) / 2
+          : 0;
+      for (let y = 0; y < offsetHeight; y += SPACING) {
+        for (let x = 0; x < offsetWidth; x += SPACING) {
+          const inCanvas = x > paddingX && x < paddingX + guidePicture.width;
+          let red = 0;
+          if (inCanvas) {
+            const idx = 4 * (x - paddingX + y * guidePicture.width);
+            red = guidePicture.pixels[idx];
+          }
+
+          const max = inCanvas
+            ? Math.ceil((SPACING * (255 - red)) / 255)
+            : R_MIN;
+          particles.push({ x, y, max });
+        }
+      }
+      p.noStroke();
+      p.fill(0);
       p.noLoop();
     };
+
+    p.draw = () => {
+      p.background(bgColorRGB.r, bgColorRGB.g, bgColorRGB.b);
+
+      const mx = p.mouseX;
+      const my = p.mouseY;
+
+      for (let i = 0; i < particles.length; i++) {
+        const pt = particles[i];
+        const dx = mx - pt.x;
+        const dy = my - pt.y;
+        const dist = Math.hypot(dx, dy) * 2;
+        const raw = Math.max(0, INFLUENCE - dist);
+        const r = Math.max(R_MIN, Math.min(pt.max, raw * pt.max * INV_INF));
+        p.circle(pt.x, pt.y, r);
+      }
+    };
+
+    p.mouseMoved = () => p.loop();
+    p.mousePressed = p.mouseMoved;
+    p.mouseReleased = () => p.noLoop();
   };
 }
 

@@ -1,5 +1,5 @@
 /**
- * this code was taken from the package
+ * code taken from
  * https://github.com/iamlite/color-core/tree/main/packages/color-core/src
  */
 
