@@ -34,16 +34,24 @@ function homeSketch(container: HTMLDivElement) {
         offsetWidth - guidePicture.width > 0
           ? (offsetWidth - guidePicture.width) / 2
           : 0;
+      const paddingY = offsetHeight - guidePicture.height > 0
+        ? (offsetHeight - guidePicture.height) / 2
+        : 0;
+
+      let pictureScanIndex = 0
       for (let y = 0; y < offsetHeight; y += SPACING) {
+        const inCanvasY = y > paddingY && y < paddingY + guidePicture.height;
         for (let x = 0; x < offsetWidth; x += SPACING) {
-          const inCanvas = x > paddingX && x < paddingX + guidePicture.width;
+          const inCanvasX = x > paddingX && x < paddingX + guidePicture.width;
           let red = 0;
-          if (inCanvas) {
-            const idx = 4 * (x - paddingX + y * guidePicture.width);
+          if (inCanvasX && inCanvasY) {
+            const idx = 4 * (pictureScanIndex * guidePicture.width);
             red = guidePicture.pixels[idx];
+            pictureScanIndex += SPACING;
+            console.log(pictureScanIndex, red);
           }
 
-          const max = inCanvas
+          const max = inCanvasX && inCanvasY
             ? Math.ceil((SPACING * (255 - red)) / 255)
             : R_MIN;
           particles.push({ x, y, max });
