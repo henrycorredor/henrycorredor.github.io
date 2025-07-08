@@ -30,29 +30,21 @@ function homeSketch(container: HTMLDivElement) {
       const guidePicture = await p.loadImage(illustration.src);
       guidePicture.loadPixels();
 
-      const paddingX =
-        offsetWidth - guidePicture.width > 0
-          ? (offsetWidth - guidePicture.width) / 2
-          : 0;
-      const paddingY =
-        offsetHeight - guidePicture.height > 0
-          ? (offsetHeight - guidePicture.height) / 2
-          : 0;
+      const aspectRatio = guidePicture.width / offsetWidth;
+      const pictureHeight = Math.floor((guidePicture.height * offsetWidth) / guidePicture.width)
+      const topMargin = Math.floor((offsetHeight - pictureHeight) / 2)
+
+      particles.length = 0
 
       for (let y = 0; y < offsetHeight; y += SPACING) {
-        const inCanvasY = y > paddingY && y < paddingY + guidePicture.height;
+        const yIndex = Math.floor(aspectRatio * y - topMargin)
         for (let x = 0; x < offsetWidth; x += SPACING) {
-          const inCanvasX = x > paddingX && x < paddingX + guidePicture.width;
           let red = 0;
-          if (inCanvasX && inCanvasY) {
-            const idx = 4 * ((x - paddingX) + ((y - paddingY) * guidePicture.width));
+          if(y > topMargin) {
+            const idx = 4 * (Math.floor(aspectRatio * x) + yIndex * guidePicture.width);
             red = guidePicture.pixels[idx];
           }
-
-          const max =
-            inCanvasX && inCanvasY
-              ? Math.ceil((SPACING * (255 - red)) / 255)
-              : R_MIN;
+          const max = red ? Math.ceil((SPACING * (255 - red)) / 255) : R_MIN;
           particles.push({ x, y, max });
         }
       }
