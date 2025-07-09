@@ -35,7 +35,6 @@ async function loadGuidePicture(p: p5) {
 }
 
 function computeParticles(width: number, height: number) {
-  console.log('computeParticles', guidePicture)
   if (!guidePicture) return []
 
   const aspectRatio = guidePicture.width / width
@@ -71,7 +70,6 @@ function computeParticles(width: number, height: number) {
 async function setup(p: p5, container: HTMLDivElement) {
   container.innerHTML = ""
   const { offsetWidth, offsetHeight } = container
-  console.log('se crea un canvas', container)
   p.createCanvas(offsetWidth, offsetHeight).parent(container)
   p.pixelDensity(1)
   p.background(bgColorRGB.r, bgColorRGB.g, bgColorRGB.b)

@@ -4,10 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Projects from "@/components/Projects.astro";
 import SeoPage from "@/components/SeoPage.astro";
 import { getCollection } from "astro:content"
-
-
 const projects = await getCollection("projects");
-console.log(projects);
 ---
 
 <BaseLayout>
