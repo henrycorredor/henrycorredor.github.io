@@ -26,7 +26,7 @@ const { Content } = await render(entry);
 
 <BaseLayout>
   <SeoPost slot="head" entry={entry} />
-  <div>
+  <section class="border-b border-gray-300 p-3 sm:p-6">
     {
       entry.data.image && (
         <Image
@@ -37,22 +37,24 @@ const { Content } = await render(entry);
         />
       )
     }
+    <div class="flex items-end">
     <h1
-      class="text-[36px] leading-snug font-bold text-balance text-black dark:text-white"
+      class="text-[36px] leading-snug font-bold text-balance text-black dark:text-white flex-grow"
     >
       {entry.data.title}
     </h1>
-    <p class="text-muted-text dark:text-dark-muted-text mt-3">
+    <p class="text-muted-text dark:text-dark-muted-text mt-3 text-right post-date">
       {formatDate(entry.data.publicationDate)}
     </p>
-    <hr
-      class="border-muted-text dark:border-dark-muted-text my-12 border-[0.5px] opacity-10 dark:opacity-15"
-    />
+    </div>
     <div class="prose mx-auto">
       <Content />
     </div>
-    <hr
-      class="border-muted-text dark:border-dark-muted-text my-32 border-[0.5px] opacity-10 dark:opacity-15"
-    />
-  </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .post-date {
+    margin-bottom: 1.5rem;
+  }
+</style>

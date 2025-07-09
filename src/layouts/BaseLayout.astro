@@ -12,11 +12,11 @@ import Navigation from "@/components/Navigation.astro";
   </BaseHead>
   <body class="bg-bg dark:bg-dark-bg h-full">
     <div class="flex h-full items-stretch">
-      <div id="p5-container" class="flex-1/2"></div>
-      <div id="content-container" class="flex-1/2">
+      <div id="p5-container" class="flex-1/2" transition:persist></div>
+      <div id="content-container" class="flex-1/2 border-l border-gray-300 overflow-y-auto">
         <Navigation />
-        <div class="mx-auto max-w-screen-sm p-3 font-sans sm:p-6">
-          <main class="min-h-[80vh]">
+        <div class="mx-auto max-w-screen-sm font-sans">
+          <main class="min-h-[80vh] ">
             <slot />
           </main>
           <!--<Footer />-->
@@ -34,4 +34,5 @@ import Navigation from "@/components/Navigation.astro";
   if (sketchContainer) {
     new p5(homeSketch(sketchContainer), sketchContainer)
   }
+  console.log("esto se ejecuta")
 </script>

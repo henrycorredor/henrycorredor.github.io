@@ -53,3 +53,13 @@
   --prose-link-color: var(--color-dark-link);
   --prose-link-underline-color: var(--color-dark-link);
 }
+
+h1 {
+  font-weight: bolder;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}

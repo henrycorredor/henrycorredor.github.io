@@ -1,31 +1,15 @@
 import type {
   SiteConfiguration,
-  NavigationLinks,
   SocialLinks,
 } from "@/types.ts";
 
 export const SITE: SiteConfiguration = {
-  title: "Barebones",
+  title: "Kurilabs",
   description:
-    "A barebones starter theme. Built with Astro, Tailwind CSS, and Markdown.",
-  href: "https://barebones.superwebthemes.com",
-  author: "SuperWeb Development Inc.",
-  locale: "en-CA",
-};
-
-export const NAV_LINKS: NavigationLinks = {
-  blog: {
-    path: "/blog",
-    label: "Blog",
-  },
-  projects: {
-    path: "/projects",
-    label: "Projects",
-  },
-  documentation: {
-    path: "https://docs.superwebthemes.com",
-    label: "Documentation",
-  },
+    "This is Henry Corredor’s personal site, showcasing his professional experience, coding experiments, and glimpses of everyday life.",
+  href: "https://kurilabs.com",
+  author: "Henry Corredor",
+  locale: "en",
 };
 
 export const SOCIAL_LINKS: SocialLinks = {

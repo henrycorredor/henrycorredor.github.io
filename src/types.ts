@@ -6,15 +6,6 @@ export type SiteConfiguration = {
   locale: string;
 };
 
-export type NavigationLinks = {
-  [key: string]: NavigationLink;
-};
-
-export type NavigationLink = {
-  label: string;
-  path: string;
-};
-
 export type SocialLinks = {
   [key: string]: SocialLink;
 };

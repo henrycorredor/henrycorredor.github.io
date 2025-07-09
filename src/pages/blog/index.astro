@@ -1,11 +1,13 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro"
 
-import Posts from "@/components/Posts.astro";
-import SeoPage from "@/components/SeoPage.astro";
+import Posts from "@/components/Posts.astro"
+import SeoPage from "@/components/SeoPage.astro"
 ---
 
 <BaseLayout>
   <SeoPage slot="head" title="Blog" />
-  <Posts />
+  <section class="border-b border-gray-300 p-3 sm:p-6">
+    <Posts />
+  </section>
 </BaseLayout>
