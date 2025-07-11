@@ -11,28 +11,40 @@ import Navigation from "@/components/Navigation.astro"
     <slot name="head" />
   </BaseHead>
   <body class="bg-bg dark:bg-dark-bg h-full">
-    <div class="flex h-full flex-col items-stretch md:flex-row">
+    <div class="flex h-full md:flex-row md:items-stretch">
       <div
         id="p5-container"
-        class="fixed top-0 right-0 left-0 h-48 w-full md:h-auto md:relative md:flex-1/2 z-0"
+        class="fixed top-0 right-0 left-0 z-0 h-48 w-full md:relative md:h-auto md:flex-1/2"
         transition:persist
       >
       </div>
       <div
         id="content-container"
-        class="pt-48 md:pt-0 flex-1/2 overflow-y-auto md:border-l border-gray-300 relative z-10"
+        class="relative z-10 flex-1/2 overflow-y-auto border-gray-300 md:border-l md:pt-0"
       >
-        <Navigation />
-        <div class="mx-auto max-w-screen-sm font-sans bg-bg dark:bg-dark-bg">
-          <main class="min-h-[80vh]">
+        <div class="min-h-[100vh]">
+          <Navigation />
+          <main
+            class="bg-bg dark:bg-dark-bg mx-auto min-h-[50vh] max-w-screen-sm font-sans"
+          >
             <slot />
           </main>
-          <!--<Footer />-->
         </div>
       </div>
     </div>
   </body>
 </html>
+
+<style>
+  @media (width < 48rem) {
+    #content-container::before {
+      content: "";
+      display: block;
+      height: calc(var(--spacing) * 48);
+      width: 1px;
+    }
+  }
+</style>
 
 <script>
   import p5 from "p5"
@@ -44,4 +56,19 @@ import Navigation from "@/components/Navigation.astro"
   if (sketchContainer) {
     new p5(homeSketch(sketchContainer), sketchContainer)
   }
+
+  let containerScroll: number | undefined
+
+  document.addEventListener("astro:before-swap", () => {
+    containerScroll = document.getElementById("content-container")?.scrollTop
+  })
+
+  document.addEventListener("astro:after-swap", () => {
+    if (containerScroll) {
+      document.getElementById("content-container")?.scrollTo({
+        top: containerScroll,
+        behavior: "instant",
+      })
+    }
+  })
 </script>
