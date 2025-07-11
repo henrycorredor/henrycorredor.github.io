@@ -10,6 +10,7 @@ const projects = await getCollection("projects");
     Projects
   </h2>
   <div class="grid list-none gap-4 p-0">
+    <a class="link" href="/projects/astro-simple-modal-demo">Astro Simple Modal - demo</a>
     {
       projects.map((project) => (
         <a  class="link" href={`/projects/${project.id}`}>

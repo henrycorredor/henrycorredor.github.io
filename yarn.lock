@@ -1075,6 +1075,11 @@ array-iterate@^2.0.0:
   resolved "https://registry.yarnpkg.com/array-iterate/-/array-iterate-2.0.1.tgz#6efd43f8295b3fee06251d3d62ead4bd9805dd24"
   integrity sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==
 
+astro-simple-modal@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/astro-simple-modal/-/astro-simple-modal-1.1.1.tgz#ba97a9508bde838ee4348f1efae8e7e152d5053c"
+  integrity sha512-ULy6x8LDkET8aJ1LqjzcUuyn9TEFgRqqC2lqL5XHBuGJ+/k70MRaKxzN9SH5BgwT48d8QJNte2Wq9Z7DtGxSAw==
+
 astro@^5.7.11:
   version "5.7.12"
   resolved "https://registry.yarnpkg.com/astro/-/astro-5.7.12.tgz#7e47d7330d7521e8318319b7cd439aca7bb2924f"
