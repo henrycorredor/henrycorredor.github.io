@@ -3,6 +3,10 @@ title: Astro Simple Modal
 description: Open source modal package for Astro
 href: https://github.com/
 ---
+import ModalDemo1 from "../../../components/simple-modal-demo/demo1.astro"
+import ModalDemo2 from "../../../components/simple-modal-demo/demo2.astro"
+import ModalDemo3 from "../../../components/simple-modal-demo/demo3.astro"
+import ModalDemo4 from "../../../components/simple-modal-demo/demo4.astro"
 
 A **simple** and **highly customizable** modal for Astro — minimal setup, full styling control.
 
@@ -17,6 +21,22 @@ Astro Simple Modal is a lightweight modal component built specifically for Astro
 - Highly customizable and flexible usage
 
 - Effortless to style
+
+## 🧪 Demo
+
+### Basic usage
+
+<ModalDemo1 />
+
+<ModalDemo2 />
+
+<ModalDemo3 />
+
+### Usage with callbacks
+
+<ModalDemo4 />
+
+
 
 ## 📦 Installation
 
@@ -55,8 +75,6 @@ import SimpleModal from 'astro-simple-modal';
 })
 </script>
 ```
-
-
 
 ### Modal handler
 
@@ -157,3 +175,15 @@ Astro Simple Modal doesn't have built-in scroll handling for content that exceed
 }
 </style>
 ```
+
+### Adding a Modal to an `.md` Document
+
+It is not possible to add this type of component directly to a standard Markdown (.md) document. However, you can enable MDX support in your Astro project to allow for more advanced component usage within your content files.
+
+To use Astro Simple Modal inside your content:
+
+- Enable MDX integration in your Astro project.
+- Create an Astro component that includes the modal and all related logic (opening, closing, etc.).
+- Import and use this component inside your .mdx document.
+
+This approach lets you take full advantage of Astro Simple Modal’s features and ensures that all modal functionality is properly encapsulated and reusable within your MDX content.
