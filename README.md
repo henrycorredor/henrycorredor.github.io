@@ -1,72 +1,73 @@
-# Gyoza
+# Welcome to your Lovable project
 
-Gyoza is a static blog template built with Astro and React.
+## Project info
 
-![astro version](https://img.shields.io/badge/astro-4.6-red)
-![node version](https://img.shields.io/badge/node-18.18-green)
+**URL**: https://lovable.dev/projects/6eebe24a-a79a-4f06-9e83-f4553dac5680
 
-Demo Site:
+## How can I edit this code?
 
-- [gyoza.lxchapu.com](https://gyoza.lxchapu.com)
-- [www.lxchapu.com](https://www.lxchapu.com)
+There are several ways of editing your application.
 
-Enjoy it!
+**Use Lovable**
 
-## 📷 Screenshots
+Simply visit the [Lovable Project](https://lovable.dev/projects/6eebe24a-a79a-4f06-9e83-f4553dac5680) and start prompting.
 
-![Preview](https://s2.loli.net/2024/05/06/A9rzC3Uym7RwdQc.webp)
+Changes made via Lovable will be committed automatically to this repo.
 
-## 🎉 Features
+**Use your preferred IDE**
 
-- ✅ 有着规范的 URL 和 OpenGraph 信息，对 SEO 友好
-- ✅ 支持站点地图
-- ✅ 支持 RSS 订阅
-- ✅ 支持夜间模式
-- ✅ 特殊日期变灰
-- ✅ 简单干净的配色和主题
-- ✅ 支持评论系统
-- ✅ 支持代码高亮
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-## 🔧 Tech Stack
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-- [Astro](https://astro.build/)
-- [React](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Jotai](https://jotai.org/)
+Follow these steps:
 
-## 📖 Documentation
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-前往：[Documentation](https://gyoza.lxchapu.com/posts/guide)
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-## 🚀 Project Structure
+# Step 3: Install the necessary dependencies.
+npm i
 
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   ├── pages/
-│   ├── plugins/
-│   ├── store/
-│   ├── styles/
-│   ├── utils/
-│   └── config.json
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
 ```
 
-网站配置保存在 `config.json` 文件。
+**Edit a file directly in GitHub**
 
-## 🧞 Commands
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-| Command        | Action                                       |
-| :------------- | :------------------------------------------- |
-| `pnpm i`       | Installs dependencies                        |
-| `pnpm dev`     | Starts local dev server at `localhost:4321`  |
-| `pnpm build`   | Build your production site to `./dist/`      |
-| `pnpm preview` | Preview your build locally, before deploying |
-| `pnpm format`  | Format code using Prettier                   |
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/6eebe24a-a79a-4f06-9e83-f4553dac5680) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
