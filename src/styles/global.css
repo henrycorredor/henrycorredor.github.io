@@ -1,69 +1,44 @@
-@import "tailwindcss";
-@import "./typography.css" layer(components);
-@variant dark (&:where(.dark, .dark *));
+@import "./iconfont.css";
+@import "./shiki.css";
+@import "./markdown.css";
+@import "./signature.css";
+@import "./swup.css";
 
-:root {
-  color-scheme: light;
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-/*:root {*/
-/*  color-scheme: light dark;*/
-/*}*/
-/*.dark {*/
-/*  color-scheme: dark;*/
-/*}*/
-/*.light {*/
-/*  color-scheme: light;*/
-/*}*/
-
-@variant dark {
-  &:where(.dark, .dark *) {
-    @slot;
-  }
-  @media (prefers-color-scheme: dark) {
-    &:where(.system, .system *) {
-      @slot;
-    }
-  }
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme {
-  --color-bg: var(--color-neutral-50);
-  --color-link: oklch(46.97% 0.2734 267.56);
-  --color-muted-text: var(--color-neutral-700);
-
-  --color-dark-bg: var(--color-neutral-950);
-  --color-dark-link: oklch(73.9% 0.1387 282.47);
-  --color-dark-muted-text: var(--color-neutral-300);
+::selection {
+  background-color: theme("colors.accent");
+  color: white;
 }
 
-/* ensure .link and typography.css are consistent */
-.link {
-  --prose-link-color: var(--color-link);
-  --prose-link-underline-color: var(--color-link);
-
-  color: var(--prose-link-color);
-  font-weight: var(--font-weight-semibold);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--prose-link-underline-color);
-  text-decoration-thickness: 1px;
-  & code {
-    font-weight: var(--font-weight-semibold);
-  }
+[data-theme="dark"] ::selection {
+  background-color: theme("colors.accent/0.3");
 }
 
-.dark .link {
-  --prose-link-color: var(--color-dark-link);
-  --prose-link-underline-color: var(--color-dark-link);
+html {
+  color: theme("textColor.primary");
+  background-color: theme("backgroundColor.root");
+  scroll-padding-top: 64px;
 }
 
-h1 {
-  font-weight: bolder;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+html.gray {
+  filter: grayscale(1);
 }
 
-p {
-  margin-bottom: 1rem;
+* {
+  scrollbar-width: thin;
 }
