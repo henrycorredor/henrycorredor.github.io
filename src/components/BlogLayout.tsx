@@ -61,7 +61,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       <footer className="border-t border-border/50 bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-8">
           <div className="text-center text-muted-foreground">
-            <p className="mb-2">© 2024 王雪的博客 - 记录生活，分享成长</p>
+            <p className="mb-2">© 2025 王雪的博客 - 记录生活，分享成长</p>
             <p className="text-sm">钢琴教师 | 前端开发学习者</p>
           </div>
         </div>
