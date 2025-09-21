@@ -1,73 +1,44 @@
-# Welcome to your Lovable project
+# Introducing Barebones 🦴
 
-## Project info
+![barebones-cover](https://github.com/user-attachments/assets/bde6d3af-472f-4320-96ec-b70040098ea9)
 
-**URL**: https://lovable.dev/projects/6eebe24a-a79a-4f06-9e83-f4553dac5680
+[View demo](https://barebones.superwebthemes.com/)
 
-## How can I edit this code?
+Welcome to Barebones, an open source template for [Astro](https://astro.build/) designed for simplicity and flexibility. Whether you're a seasoned developer or just starting out, Barebones provides everything you need to kickstart your next blog with minimal setup.
 
-There are several ways of editing your application.
+Head over to the [repository](https://github.com/superwebthemes/barebones) and check out our [documentation](https://barebones.superwebthemes.com) to get started.
 
-**Use Lovable**
+## Key features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6eebe24a-a79a-4f06-9e83-f4553dac5680) and start prompting.
+- **Fast by default:** Leverage the power of Astro, Tailwind CSS, and Markdown to create fast, lightweight web pages.
+- **Minimal and customizable:** Solid foundation to build upon and meet your unique needs. Zero frameworks installed.
+- **SEO-friendly:** Sitemap, an [RSS feed](https://barebones.superwebthemes.com/rss.xml), and Open Graph protocol support out of the box.
+- **Accessible to all:** System, dark, and light mode support. Keyboard navigation and semantic HTML. Fully compliant with WCAG standards.
+- **Free and open source:** Join the community and contribute to make this project even better!
 
-Changes made via Lovable will be committed automatically to this repo.
+## Core Web Vitals
 
-**Use your preferred IDE**
+Performance: **100**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Accessibility: **100**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Best Practices: **100**
 
-Follow these steps:
+SEO: **100**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Commands
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+All commands are run from the root of the project, from a terminal:
 
-# Step 3: Install the necessary dependencies.
-npm i
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## Further reading
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/6eebe24a-a79a-4f06-9e83-f4553dac5680) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Read the [documentation for Barebones](https://docs.superwebthemes.com), join our [Discord server](https://discord.gg/V5MCBCsAjJ), or find me on X (Twitter) at [@boogerbuttcheek](https://x.com/boogerbuttcheek).
