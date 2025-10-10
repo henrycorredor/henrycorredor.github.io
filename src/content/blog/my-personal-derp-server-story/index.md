@@ -1,7 +1,7 @@
 ---
 title: "How I ended up running a DERP server in China"
 description: A personal story of setting up a Tailscale DERP server in China, learning about ICP registrations, and building a stable Tailnet behind the firewall.
-publicationDate: 2025-10-26
+publicationDate: 2025-09-26
 ---
 
 Last month I had a curious experience: learning how to register web services in China. It wasn’t a formal course, just the inevitable result of trying to set up my own personal cloud. Along the way, I discovered two very specific things:
